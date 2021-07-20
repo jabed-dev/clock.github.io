@@ -21,7 +21,7 @@ function selectors(selector, number, position) {
     return selectNumber.querySelector(`.${position}`);
 }
 
-function clearColor(selector) {
+function clearNumberColor(selector) {
     for (let number = 1; number <= 2; number++) {
         let selectNumber = document.querySelector(`.${selector}.number-${number}`);
         let row = selectNumber.getElementsByClassName('row');
@@ -37,7 +37,7 @@ function clearColor(selector) {
 }
 
 function setNumberColor(time, number) {
-    clearColor(time);
+    clearNumberColor(time);
 
     let numberStr = number.toString();
     numberStr = numberStr.length === 1 ? '0' + numberStr : numberStr;
@@ -54,7 +54,7 @@ let date = new Date();
 let minutes = date.getMinutes();
 let hours = date.getHours();
 
-let getTimes = () => {
+function getTimes() {
     let date = new Date();
     setNumberColor('seconds', date.getSeconds());
 
