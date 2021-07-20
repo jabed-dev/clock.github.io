@@ -1,4 +1,7 @@
-let color = 'red';
+let style = getComputedStyle(document.querySelector(':root'));
+let onColor = style.getPropertyValue('--oncolor');
+let offColor = style.getPropertyValue('--offcolor');
+
 let numberPosition = {
     '0': ['row-1', 'row-2', 'row-3', 'row-4', 'col-1', 'col-3'],
     '1': ['row-2', 'row-3'],
@@ -25,10 +28,10 @@ function clearColor(selector) {
         let col = selectNumber.getElementsByClassName('col');
 
         for (let i = 0; i < row.length; i++) {
-            row[i].style.setProperty('--bgc', '#636d80');
+            row[i].style.setProperty('--color', offColor);
         }
         for (let i = 0; i < col.length; i++) {
-            col[i].style.setProperty('--bgc', '#636d80');
+            col[i].style.setProperty('--color', offColor);
         }
     }
 }
@@ -42,7 +45,7 @@ function setNumberColor(time, number) {
     for (let i = 0; i < numberStr.length; i++) {
         for (let j = 0; j < numberPosition[numberStr[i]].length; j++) {
             let numberIndex = selectors(time, i + 1, numberPosition[numberStr[i]][j]);
-            numberIndex.style.setProperty('--bgc', color);
+            numberIndex.style.setProperty('--color', onColor);
         }
     }
 }
@@ -80,7 +83,7 @@ function start() {
         setNumberColor('hours', hours);
 
         for (let i = 0; i < dot.length; i++) {
-            dot[i].style.backgroundColor = color;
+            dot[i].style.backgroundColor = onColor;
         }
     }, 1000);
 }
