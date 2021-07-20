@@ -1,3 +1,10 @@
+:root {
+    --bodybg: #28333f;
+    --clockbg: #000000;
+    --offcolor: #0f1111;
+    --oncolor: #ff0000;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +17,7 @@ html, body {
 }
 
 body {
-    background-color: #596775;
+    background-color: var(--bodybg);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +30,7 @@ body {
     align-items: center;
     width: 350px;
     height: 350px;
-    background-color: #707b91;
+    background-color: var(--clockbg);
     margin-top: -100px;
     justify-content: space-evenly;
 }
@@ -61,34 +68,16 @@ body {
 .row {
     width: 24px;
     height: 98px;
-    background-color: #4a515e;
+    background-color: var(--offcolor);
 }
 
-.col {
-    width: 80px;
-    height: 24px;
-    background-color: #4e5664;
-}
-
-.row-1 {
-    --bgc: #636d80;
-}
-
-.row-2 {
-    --bgc: #636d80;
-}
-
-.row-3 {
-    --bgc: #636d80;
-}
-
-.row-4 {
-    --bgc: #636d80;
+.row-1, .row-2, .row-3, .row-4 {
+    --color: var(--offcolor);
 }
 
 .row-1, .row-2, .row-3, .row-4 {
     position: relative;
-    background-color: var(--bgc);
+    background-color: var(--color);
 }
 
 .row-1::after, .row-2::after, .row-3::after, .row-4::after {
@@ -98,7 +87,7 @@ body {
     left: 0;
     width: 0;
     height: 0;
-    border-bottom: 12px solid var(--bgc);
+    border-bottom: 12px solid var(--color);
     border-right: 12px solid transparent;
     border-left: 12px solid transparent;
     z-index: 9;
@@ -111,27 +100,25 @@ body {
     left: 0;
     width: 0;
     height: 0;
-    border-top: 12px solid var(--bgc);
+    border-top: 12px solid var(--color);
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
     z-index: 9;
 }
 
-.col-1 {
-    --bgc: #636d80;
+.col {
+    width: 80px;
+    height: 24px;
+    background-color: var(--offcolor);
 }
 
-.col-2 {
-    --bgc: #636d80;
-}
-
-.col-3 {
-    --bgc: #636d80;
+.col-1, .col-2, .col-3 {
+    --color: var(--offcolor);
 }
 
 .col-1, .col-2, .col-3 {
     position: relative;
-    background-color: var(--bgc);
+    background-color: var(--color);
 }
 
 .col-1::after, .col-2::after, .col-3::after {
@@ -141,7 +128,7 @@ body {
     bottom: 0;
     width: 0;
     height: 0;
-    border-right: 12px solid var(--bgc);
+    border-right: 12px solid var(--color);
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     z-index: 9;
@@ -154,7 +141,7 @@ body {
     bottom: 0;
     width: 0;
     height: 0;
-    border-left: 12px solid var(--bgc);
+    border-left: 12px solid var(--color);
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     z-index: 9;
@@ -167,7 +154,7 @@ body {
     flex-wrap: wrap;
     width: 30px;
     height: 350px;
-    background-color: #707b91;
+    background-color: var(--clockbg);
     margin-top: -100px;
 }
 
@@ -177,12 +164,12 @@ body {
     align-content: space-around;
     flex-wrap: wrap;
     height: 280px;
-    background-color: #707b91;
+    background-color: inherit;
 }
 
 .center .dot {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #636d80;
+    background-color: var(--offcolor);
 }
