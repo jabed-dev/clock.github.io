@@ -64,7 +64,8 @@ function getTimes() {
     }
 
     if (hours < date.getHours()) {
-        hours = hours > 12 ? hours - 12 : hours === 0 ? hours + 12 : hours;
+        hours = date.getHours();
+        hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
         setNumberColor('hours', hours);
         hours = date.getHours();
     }
@@ -72,15 +73,17 @@ function getTimes() {
 
 
 function start() {
-    startTime = setInterval(() => {
+    setInterval(() => {
         getTimes();
     }, 1000);
 
     let dot = document.getElementsByClassName('dot');
     setTimeout(() => {
-        setNumberColor('minutes', date.getMinutes());
-        hours = hours > 12 ? hours - 12 : hours === 0 ? hours + 12 : hours;
+        setNumberColor('minutes', minutes);
+
+        hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
         setNumberColor('hours', hours);
+        hours = date.getHours();
 
         for (let i = 0; i < dot.length; i++) {
             dot[i].style.backgroundColor = onColor;
