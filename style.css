@@ -45,7 +45,7 @@ body {
     position: relative;
 }
 
-.row-fluid {
+.row-float {
     display: flex;
     width: 24px;
     height: 246px;
@@ -55,7 +55,7 @@ body {
     position: relative;
 }
 
-.col-fluid {
+.col-float {
     display: flex;
     width: 81px;
     height: 270px;
@@ -158,7 +158,7 @@ body {
     margin-top: -100px;
 }
 
-.center {
+.dot-float {
     display: flex;
     justify-content: center;
     align-content: space-around;
@@ -167,7 +167,7 @@ body {
     background-color: inherit;
 }
 
-.center .dot {
+.dot-float .dot {
     width: 30px;
     height: 30px;
     border-radius: 50%;

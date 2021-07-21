@@ -1,6 +1,6 @@
-let style = getComputedStyle(document.querySelector(':root'));
-let onColor = style.getPropertyValue('--oncolor');
-let offColor = style.getPropertyValue('--offcolor');
+let rootStyle = getComputedStyle(document.querySelector(':root'));
+let offColor = rootStyle.getPropertyValue('--offcolor');
+let onColor = rootStyle.getPropertyValue('--oncolor');
 
 let numberPosition = {
     '0': ['row-1', 'row-2', 'row-3', 'row-4', 'col-1', 'col-3'],
@@ -29,9 +29,7 @@ function clearNumberColor(selector) {
 
         for (let i = 0; i < row.length; i++) {
             row[i].style.setProperty('--color', offColor);
-        }
-        for (let i = 0; i < col.length; i++) {
-            col[i].style.setProperty('--color', offColor);
+            col[i]?.style.setProperty('--color', offColor);
         }
     }
 }
@@ -50,17 +48,15 @@ function setNumberColor(time, number) {
     }
 }
 
-let date = new Date();
-let minutes = date.getMinutes();
-let hours = date.getHours();
+let minutes, hours, date;
 
 function getTimes() {
     let date = new Date();
     setNumberColor('seconds', date.getSeconds());
 
     if (minutes < date.getMinutes()) {
-        setNumberColor('minutes', date.getMinutes());
         minutes = date.getMinutes();
+        setNumberColor('minutes', minutes);
     }
 
     if (hours < date.getHours()) {
@@ -77,18 +73,20 @@ function start() {
         getTimes();
     }, 1000);
 
+    date = new Date();
+    minutes = date.getMinutes();
+    hours = date.getHours();
+
+    setNumberColor('seconds', date.getSeconds());
+    setNumberColor('minutes', minutes);
+    hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
+    setNumberColor('hours', hours);
+    hours = date.getHours();
+
     let dot = document.getElementsByClassName('dot');
-    setTimeout(() => {
-        setNumberColor('minutes', minutes);
-
-        hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
-        setNumberColor('hours', hours);
-        hours = date.getHours();
-
-        for (let i = 0; i < dot.length; i++) {
-            dot[i].style.backgroundColor = onColor;
-        }
-    }, 1000);
+    for (let i = 0; i < dot.length; i++) {
+        dot[i].style.backgroundColor = onColor;
+    }
 }
 
 start();
