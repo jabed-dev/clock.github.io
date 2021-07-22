@@ -53,13 +53,13 @@ let minutes, hours, date;
 function getTimes() {
     let date = new Date();
     setNumberColor('seconds', date.getSeconds());
-
-    if (minutes < date.getMinutes()) {
+    console.log(date.getSeconds());
+    if (minutes < date.getMinutes() || !date.getMinutes()) {
         minutes = date.getMinutes();
         setNumberColor('minutes', minutes);
     }
 
-    if (hours < date.getHours()) {
+    if (hours < date.getHours() || !date.getHours()) {
         hours = date.getHours();
         hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
         setNumberColor('hours', hours);
