@@ -74,8 +74,6 @@ function startTimes() {
     dates.innerText = `${prefix0(toDay)}-${prefix0(month + 1)}`
     dates.style.color = onColor
 
-
-
     let dot = document.getElementsByClassName('dot');
     for (let i = 0; i < dot.length; i++) {
         dot[i].style.backgroundColor = onColor;
