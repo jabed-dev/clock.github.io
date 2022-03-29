@@ -29,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 350px;
-    height: 350px;
+    height: 380px;
     background-color: var(--clockbg);
     margin-top: -100px;
     justify-content: space-evenly;
@@ -153,7 +153,7 @@ body {
     align-content: space-around;
     flex-wrap: wrap;
     width: 30px;
-    height: 350px;
+    height: 380px;
     background-color: var(--clockbg);
     margin-top: -100px;
 }
@@ -178,7 +178,7 @@ body {
     width: 90px;
     justify-content: flex-start;
     align-content: flex-end;
-    padding-bottom: 54px;
+    padding-bottom: 70px;
 }
 
 #times {
