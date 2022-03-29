@@ -2,18 +2,18 @@ let rootStyle = getComputedStyle(document.querySelector(':root'));
 let offColor = rootStyle.getPropertyValue('--offcolor');
 let onColor = rootStyle.getPropertyValue('--oncolor');
 
-let numberPosition = {
-    '0': ['row-1', 'row-2', 'row-3', 'row-4', 'col-1', 'col-3'],
-    '1': ['row-2', 'row-3'],
-    '2': ['row-2', 'row-4', 'col-1', 'col-2', 'col-3'],
-    '3': ['row-2', 'row-3', 'col-1', 'col-2', 'col-3'],
-    '4': ['row-1', 'row-2', 'row-3', 'col-2'],
-    '5': ['row-1', 'row-3', 'col-1', 'col-2', 'col-3'],
-    '6': ['row-1', 'row-3', 'row-4', 'col-1', 'col-2', 'col-3'],
-    '7': ['row-2', 'row-3', 'col-1'],
-    '8': ['row-1', 'row-2', 'row-3', 'row-4', 'col-1', 'col-2', 'col-3'],
-    '9': ['row-1', 'row-2', 'row-3', 'col-1', 'col-2', 'col-3']
-};
+let numberPosition = [
+    ['row-1', 'row-2', 'row-3', 'row-4', 'col-1', 'col-3'],
+    ['row-2', 'row-3'],
+    ['row-2', 'row-4', 'col-1', 'col-2', 'col-3'],
+    ['row-2', 'row-3', 'col-1', 'col-2', 'col-3'],
+    ['row-1', 'row-2', 'row-3', 'col-2'],
+    ['row-1', 'row-3', 'col-1', 'col-2', 'col-3'],
+    ['row-1', 'row-3', 'row-4', 'col-1', 'col-2', 'col-3'],
+    ['row-2', 'row-3', 'col-1'],
+    ['row-1', 'row-2', 'row-3', 'row-4', 'col-1', 'col-2', 'col-3'],
+    ['row-1', 'row-2', 'row-3', 'col-1', 'col-2', 'col-3']
+]
 
 
 function selectors(selector, number, position) {
@@ -37,51 +37,44 @@ function clearNumberColor(selector) {
 function setNumberColor(time, number) {
     clearNumberColor(time);
 
-    let numberStr = number.toString();
-    numberStr = numberStr.length === 1 ? '0' + numberStr : numberStr;
-
-    for (let i = 0; i < numberStr.length; i++) {
-        for (let j = 0; j < numberPosition[numberStr[i]].length; j++) {
-            let numberIndex = selectors(time, i + 1, numberPosition[numberStr[i]][j]);
+    for (let i = 0; i < number.length; i++) {
+        for (let j = 0; j < numberPosition[number[i]].length; j++) {
+            let numberIndex = selectors(time, i + 1, numberPosition[number[i]][j]);
             numberIndex.style.setProperty('--color', onColor);
         }
     }
 }
 
-let minutes, hours, date;
 
-function getTimes() {
-    let date = new Date();
-    setNumberColor('seconds', date.getSeconds());
-
-    if (minutes < date.getMinutes() || !date.getMinutes()) {
-        minutes = date.getMinutes();
-        setNumberColor('minutes', minutes);
+function startTimes() {
+    const prefix0 = (num) => {
+        let numStr = num.toString()
+        return numStr.length === 1 ? '0' + numStr : numStr
     }
 
-    if (hours < date.getHours() || !date.getHours()) {
-        hours = date.getHours();
-        hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
-        setNumberColor('hours', hours);
-        hours = date.getHours();
-    }
-};
+    const date = new Date()
+        , hours = date.getHours()
+        , minutes = date.getMinutes()
+        , seconds = date.getSeconds()
+
+        , hours12 = 1 <= hours && hours <= 12 ? hours : hours === 0 ? 12 : hours - 12
+        , times = 0 <= hours && hours <= 11 ? 'AM' : 'PM'
+        , toDay = date.getDate()
+        , month = date.getMonth()
+
+    setNumberColor('hours', prefix0(hours12))
+    setNumberColor('minutes', prefix0(minutes))
+    setNumberColor('seconds', prefix0(seconds))
+
+    let timesId = document.getElementById('times')
+    timesId.innerText = times
+    timesId.style.color = onColor
+
+    let dates = document.getElementById('dates')
+    dates.innerText = `${prefix0(toDay)}-${prefix0(month + 1)}`
+    dates.style.color = onColor
 
 
-function start() {
-    setInterval(() => {
-        getTimes();
-    }, 1000);
-
-    date = new Date();
-    minutes = date.getMinutes();
-    hours = date.getHours();
-
-    setNumberColor('seconds', date.getSeconds());
-    setNumberColor('minutes', minutes);
-    hours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
-    setNumberColor('hours', hours);
-    hours = date.getHours();
 
     let dot = document.getElementsByClassName('dot');
     for (let i = 0; i < dot.length; i++) {
@@ -89,5 +82,6 @@ function start() {
     }
 }
 
-start();
+startTimes()
+setInterval(startTimes, 1000)
 
